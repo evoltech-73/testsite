@@ -67,13 +67,14 @@
         .brand {
             display: flex;
             align-items: center;
-            width: min(360px, 48vw);
-            min-width: 220px;
+            width: auto;
+            min-width: 0;
         }
 
         .brand-logo {
-            width: 100%;
-            height: auto;
+            width: auto;
+            height: 54px;
+            max-width: min(660px, 70vw);
             object-fit: contain;
         }
 
@@ -132,7 +133,7 @@
         .hero::after {
             content: "";
             position: absolute;
-            border: 5px solid rgba(38, 50, 56, 0.18);
+            border: 5px solid rgba(255, 255, 255, 0.2);
             border-radius: 999px;
             pointer-events: none;
         }
@@ -186,6 +187,11 @@
             text-shadow: 4px 4px 0 var(--line);
         }
 
+        .hero h1 span {
+            display: inline;
+            color: var(--green);
+        }
+
         .hero-copy {
             max-width: 650px;
             margin-bottom: 28px;
@@ -226,17 +232,28 @@
 
         .diy-logo-card {
             width: min(100%, 480px);
-            min-height: 485px;
+            min-height: auto;
             margin-left: auto;
-            padding: 34px 26px;
+            padding: 18px;
             border-radius: 68px;
-            background: #ff5a00;
-            box-shadow: inset 0 0 0 0 #fff, 0 24px 0 rgba(38, 50, 56, 0.16);
+            background: #ffffff;
+            border: 5px solid var(--line);
+            box-shadow: 12px 12px 0 rgba(38, 50, 56, 0.28);
         }
 
         .diy-logo {
             width: 100%;
             height: auto;
+        }
+
+        .hero-scene {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            border: 0;
+            border-radius: 42px;
+            background: #fffaf3;
+            object-fit: cover;
         }
 
         .section {
@@ -520,7 +537,12 @@
             }
 
             .brand {
-                width: min(300px, 72vw);
+                width: auto;
+            }
+
+            .brand-logo {
+                height: 48px;
+                max-width: min(470px, 82vw);
             }
 
             .hero-grid,
@@ -587,7 +609,7 @@
             <div class="container hero-grid">
                 <div>
                     <p class="eyebrow">中小製造業向け スモールスタートDX</p>
-                    <h1>現場の「面倒くさい」を、最短1週間でアプリ化。</h1>
+                    <h1>現場の「面倒くさい」を、<span>最短1週間</span>でアプリ化。</h1>
                     <p class="hero-copy">
                         紙の日報や点検表をExcelへ打ち直す二度手間を、低コストな業務アプリで解決。IT担当者がいない企業様にも、現場目線でわかりやすく支援します。
                     </p>
@@ -601,38 +623,8 @@
                         <li>Clickで高速開発</li>
                     </ul>
                 </div>
-                <div class="diy-logo-card" aria-label="タブレットを操作するデフォルメ人物イラスト">
-                    <svg class="diy-logo" viewBox="0 0 460 430" role="img" aria-labelledby="tablet-hero-title">
-                        <title id="tablet-hero-title">後ろ姿のデフォルメ人物がタブレットを操作しているイラスト</title>
-
-                        <rect x="78" y="54" width="304" height="224" rx="22" fill="#ffffff" stroke="var(--line)" stroke-width="7"/>
-                        <rect x="104" y="84" width="252" height="154" rx="10" fill="var(--green)" stroke="var(--line)" stroke-width="7"/>
-                        <path d="M141 125h178M141 164h118M141 203h148" stroke="#ffffff" stroke-width="14" stroke-linecap="round"/>
-                        <path d="M312 184l20 20 39-48" fill="none" stroke="var(--line)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="230" cy="258" r="7" fill="var(--line)"/>
-
-                        <path d="M52 337c34-46 107-74 183-74 79 0 149 28 183 74" fill="none" stroke="rgba(38,50,56,.16)" stroke-width="6" stroke-linecap="round"/>
-                        <path d="M75 356h310" stroke="rgba(38,50,56,.18)" stroke-width="8" stroke-linecap="round"/>
-
-                        <path d="M157 211c7-37 36-63 73-63s66 26 73 63" fill="#ffbd2e" stroke="var(--line)" stroke-width="7" stroke-linejoin="round"/>
-                        <path d="M180 177c18 13 52 13 71-3 11 18 29 28 48 31" fill="none" stroke="var(--line)" stroke-width="7" stroke-linecap="round"/>
-                        <rect x="147" y="203" width="166" height="152" rx="30" fill="#ffffff" stroke="var(--line)" stroke-width="7"/>
-                        <path d="M181 232h98v98h-98z" fill="var(--orange)" stroke="var(--line)" stroke-width="7" stroke-linejoin="round"/>
-                        <path d="M212 232v98" stroke="var(--line)" stroke-width="7"/>
-
-                        <path d="M144 249c-24 6-42 20-51 42" fill="none" stroke="var(--line)" stroke-width="18" stroke-linecap="round"/>
-                        <path d="M316 249c24 6 42 20 51 42" fill="none" stroke="var(--line)" stroke-width="18" stroke-linecap="round"/>
-                        <path d="M111 286l57 22" stroke="#ffffff" stroke-width="13" stroke-linecap="round"/>
-                        <path d="M349 286l-57 22" stroke="#ffffff" stroke-width="13" stroke-linecap="round"/>
-
-                        <rect x="129" y="286" width="202" height="82" rx="10" fill="#d7d7d7" stroke="var(--line)" stroke-width="7"/>
-                        <rect x="154" y="306" width="152" height="34" rx="5" fill="#ffffff" stroke="var(--line)" stroke-width="6"/>
-                        <path d="M176 323h35M229 323h55" stroke="var(--orange)" stroke-width="8" stroke-linecap="round"/>
-                        <path d="M196 368h68" stroke="var(--line)" stroke-width="8" stroke-linecap="round"/>
-
-                        <path d="M86 96l-29-27M73 151H36M88 204l-32 24" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
-                        <path d="M381 96l29-27M394 151h37M379 204l32 24" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
-                    </svg>
+                <div class="diy-logo-card" aria-label="製造業の現場アプリを表すイラスト">
+                    <img class="hero-scene" src="assets/hero-manufacturing-devices.png" alt="タブレットとスマートフォンを使った製造業向け現場アプリのイラスト">
                 </div>
             </div>
         </section>
