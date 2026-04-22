@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>業務アプリ工房 | DIYな業務アプリ開発</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <style>
+        :root {
+            --orange: #ff5a00;
+            --green: #88d83a;
+            --red: #ff2a2a;
+            --ink: #263238;
+            --paper: #fffaf3;
+            --soft: #fff0df;
+            --gray: #d7d7d7;
+            --line: #263238;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img, svg {
+            display: block;
+        }
+
+        .container {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(255, 250, 243, 0.94);
+            border-bottom: 5px solid var(--line);
+        }
+
+        .header-inner {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            width: min(360px, 48vw);
+            min-width: 220px;
+        }
+
+        .brand-logo {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .nav a {
+            min-height: 42px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .button {
+            min-height: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0 22px;
+            border: 5px solid var(--line);
+            border-radius: 6px;
+            color: var(--ink);
+            background: var(--green);
+            font: inherit;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 6px 6px 0 var(--line);
+            transition: transform 0.16s ease, box-shadow 0.16s ease;
+        }
+
+        .button:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 var(--line);
+        }
+
+        .button.secondary {
+            color: #fff;
+            background: var(--ink);
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 58px 0 70px;
+            background: var(--orange);
+            border-bottom-left-radius: 72px;
+            border-bottom-right-radius: 72px;
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border: 5px solid rgba(38, 50, 56, 0.18);
+            border-radius: 999px;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            width: 420px;
+            height: 420px;
+            top: -210px;
+            right: -110px;
+        }
+
+        .hero::after {
+            width: 280px;
+            height: 280px;
+            left: -120px;
+            bottom: -120px;
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 0.95fr);
+            align-items: center;
+            gap: 48px;
+        }
+
+        .eyebrow {
+            width: fit-content;
+            margin: 0 0 18px;
+            padding: 5px 12px;
+            color: var(--ink);
+            background: var(--green);
+            border: 4px solid var(--line);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        h1, h2, h3, p {
+            margin-top: 0;
+        }
+
+        h1 {
+            max-width: 720px;
+            margin-bottom: 22px;
+            color: #fff;
+            font-size: clamp(36px, 6vw, 66px);
+            line-height: 1.08;
+            letter-spacing: 0;
+            text-shadow: 4px 4px 0 var(--line);
+        }
+
+        .hero-copy {
+            max-width: 650px;
+            margin-bottom: 28px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .hero-points {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 24px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .hero-points li,
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            min-height: 38px;
+            padding: 3px 12px;
+            border: 4px solid var(--line);
+            border-radius: 6px;
+            color: var(--ink);
+            background: #fff;
+            font-size: 14px;
+            font-weight: 900;
+            box-shadow: 4px 4px 0 var(--line);
+        }
+
+        .diy-logo-card {
+            width: min(100%, 480px);
+            min-height: 485px;
+            margin-left: auto;
+            padding: 34px 26px;
+            border-radius: 68px;
+            background: #ff5a00;
+            box-shadow: inset 0 0 0 0 #fff, 0 24px 0 rgba(38, 50, 56, 0.16);
+        }
+
+        .diy-logo {
+            width: 100%;
+            height: auto;
+        }
+
+        .section {
+            padding: 86px 0;
+        }
+
+        .section.alt {
+            background:
+                linear-gradient(90deg, rgba(38, 50, 56, 0.06) 1px, transparent 1px),
+                linear-gradient(rgba(38, 50, 56, 0.06) 1px, transparent 1px),
+                var(--soft);
+            background-size: 32px 32px;
+        }
+
+        .section-head {
+            max-width: 720px;
+            margin-bottom: 34px;
+        }
+
+        .section-head.center {
+            margin-right: auto;
+            margin-left: auto;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            font-size: clamp(28px, 4vw, 43px);
+            line-height: 1.18;
+            text-decoration: underline;
+            text-decoration-color: var(--green);
+            text-decoration-thickness: 10px;
+            text-underline-offset: -2px;
+        }
+
+        .lead {
+            color: #455a64;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .intro-box {
+            margin: 0 0 28px;
+            padding: 24px;
+            border: 5px solid var(--line);
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 9px 9px 0 var(--line);
+        }
+
+        .intro-box p {
+            margin: 0;
+            color: #455a64;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            min-height: 246px;
+            padding: 24px;
+            border: 5px solid var(--line);
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 9px 9px 0 var(--line);
+            transition: transform 0.16s ease, box-shadow 0.16s ease;
+        }
+
+        .card:nth-child(2n) {
+            background: #f1ffd9;
+        }
+
+        .card:nth-child(3n) {
+            background: #fff3f3;
+        }
+
+        .card:hover {
+            transform: translate(4px, 4px);
+            box-shadow: 5px 5px 0 var(--line);
+        }
+
+        .icon-box {
+            width: 58px;
+            height: 58px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+            color: var(--ink);
+            background: var(--green);
+            border: 5px solid var(--line);
+            border-radius: 6px;
+        }
+
+        .card:nth-child(3n) .icon-box {
+            background: var(--red);
+            color: #fff;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            line-height: 1.35;
+        }
+
+        .card p {
+            margin-bottom: 0;
+            color: #455a64;
+            font-weight: 700;
+        }
+
+        .service-list {
+            margin: 18px 0 0;
+            padding: 18px 0 0;
+            border-top: 4px solid var(--line);
+            color: var(--ink);
+            list-style: none;
+        }
+
+        .service-list li {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .service-list li::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            flex: 0 0 10px;
+            margin-top: 8px;
+            border: 3px solid var(--line);
+            background: var(--orange);
+        }
+
+        .price-note {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .cta {
+            padding: 74px 0;
+            color: #fff;
+            background: var(--line);
+        }
+
+        .cta-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+        }
+
+        .cta h2 {
+            margin-bottom: 8px;
+            text-decoration-color: var(--orange);
+            text-shadow: 3px 3px 0 #000;
+        }
+
+        .cta p {
+            max-width: 640px;
+            margin-bottom: 0;
+            color: rgba(255, 255, 255, 0.88);
+            font-weight: 800;
+        }
+
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 0.82fr 1.18fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .contact-note {
+            padding: 30px;
+            border: 5px solid var(--line);
+            border-radius: 8px;
+            color: var(--ink);
+            background: var(--orange);
+            box-shadow: 9px 9px 0 var(--line);
+        }
+
+        .contact-note p {
+            margin-bottom: 0;
+            color: #fff;
+            font-weight: 900;
+        }
+
+        form {
+            padding: 28px;
+            border: 5px solid var(--line);
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 9px 9px 0 var(--line);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 13px 14px;
+            border: 4px solid var(--line);
+            border-radius: 6px;
+            color: var(--ink);
+            background: #fffaf3;
+            font: inherit;
+            font-weight: 700;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input:focus, textarea:focus {
+            outline: 5px solid rgba(136, 216, 58, 0.45);
+        }
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        .sent-message {
+            display: none;
+            margin-top: 16px;
+            padding: 13px 14px;
+            border: 4px solid var(--line);
+            border-radius: 6px;
+            color: var(--ink);
+            background: var(--green);
+            font-weight: 900;
+            text-align: center;
+        }
+
+        .sent-message.show {
+            display: block;
+        }
+
+        .site-footer {
+            padding: 36px 0;
+            color: #fff;
+            background: var(--orange);
+            border-top: 5px solid var(--line);
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 18px;
+        }
+
+        @media (max-width: 860px) {
+            .nav {
+                display: none;
+            }
+
+            .brand {
+                width: min(300px, 72vw);
+            }
+
+            .hero-grid,
+            .grid-3,
+            .contact-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-inner {
+                display: grid;
+            }
+
+            .diy-logo-card {
+                min-height: auto;
+                margin: 20px auto 0;
+                border-radius: 42px;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .container {
+                width: min(100% - 24px, 1120px);
+            }
+
+            .hero {
+                padding-top: 40px;
+                border-bottom-left-radius: 42px;
+                border-bottom-right-radius: 42px;
+            }
+
+            h1 {
+                text-shadow: 3px 3px 0 var(--line);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner,
+            .footer-links {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="#top" aria-label="業務アプリ工房のトップへ">
+                <img class="brand-logo" src="assets/logo.png" alt="業務アプリ工房">
+            </a>
+            <nav class="nav" aria-label="主要ナビゲーション">
+                <a href="#concept">コンセプト</a>
+                <a href="#services">サービス</a>
+                <a href="#works">アプリ例</a>
+                <a class="button" href="#contact">問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <p class="eyebrow">中小製造業向け スモールスタートDX</p>
+                    <h1>現場の「面倒くさい」を、最短1週間でアプリ化。</h1>
+                    <p class="hero-copy">
+                        紙の日報や点検表をExcelへ打ち直す二度手間を、低コストな業務アプリで解決。IT担当者がいない企業様にも、現場目線でわかりやすく支援します。
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button" href="#contact">無料で相談する</a>
+                        <a class="button secondary" href="#services">サービスを見る</a>
+                    </div>
+                    <ul class="hero-points" aria-label="サービスの特徴">
+                        <li>1画面 10,000円〜</li>
+                        <li>最短1週間で納品</li>
+                        <li>Clickで高速開発</li>
+                    </ul>
+                </div>
+                <div class="diy-logo-card" aria-label="タブレットを操作するデフォルメ人物イラスト">
+                    <svg class="diy-logo" viewBox="0 0 460 430" role="img" aria-labelledby="tablet-hero-title">
+                        <title id="tablet-hero-title">後ろ姿のデフォルメ人物がタブレットを操作しているイラスト</title>
+
+                        <rect x="78" y="54" width="304" height="224" rx="22" fill="#ffffff" stroke="var(--line)" stroke-width="7"/>
+                        <rect x="104" y="84" width="252" height="154" rx="10" fill="var(--green)" stroke="var(--line)" stroke-width="7"/>
+                        <path d="M141 125h178M141 164h118M141 203h148" stroke="#ffffff" stroke-width="14" stroke-linecap="round"/>
+                        <path d="M312 184l20 20 39-48" fill="none" stroke="var(--line)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="230" cy="258" r="7" fill="var(--line)"/>
+
+                        <path d="M52 337c34-46 107-74 183-74 79 0 149 28 183 74" fill="none" stroke="rgba(38,50,56,.16)" stroke-width="6" stroke-linecap="round"/>
+                        <path d="M75 356h310" stroke="rgba(38,50,56,.18)" stroke-width="8" stroke-linecap="round"/>
+
+                        <path d="M157 211c7-37 36-63 73-63s66 26 73 63" fill="#ffbd2e" stroke="var(--line)" stroke-width="7" stroke-linejoin="round"/>
+                        <path d="M180 177c18 13 52 13 71-3 11 18 29 28 48 31" fill="none" stroke="var(--line)" stroke-width="7" stroke-linecap="round"/>
+                        <rect x="147" y="203" width="166" height="152" rx="30" fill="#ffffff" stroke="var(--line)" stroke-width="7"/>
+                        <path d="M181 232h98v98h-98z" fill="var(--orange)" stroke="var(--line)" stroke-width="7" stroke-linejoin="round"/>
+                        <path d="M212 232v98" stroke="var(--line)" stroke-width="7"/>
+
+                        <path d="M144 249c-24 6-42 20-51 42" fill="none" stroke="var(--line)" stroke-width="18" stroke-linecap="round"/>
+                        <path d="M316 249c24 6 42 20 51 42" fill="none" stroke="var(--line)" stroke-width="18" stroke-linecap="round"/>
+                        <path d="M111 286l57 22" stroke="#ffffff" stroke-width="13" stroke-linecap="round"/>
+                        <path d="M349 286l-57 22" stroke="#ffffff" stroke-width="13" stroke-linecap="round"/>
+
+                        <rect x="129" y="286" width="202" height="82" rx="10" fill="#d7d7d7" stroke="var(--line)" stroke-width="7"/>
+                        <rect x="154" y="306" width="152" height="34" rx="5" fill="#ffffff" stroke="var(--line)" stroke-width="6"/>
+                        <path d="M176 323h35M229 323h55" stroke="var(--orange)" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M196 368h68" stroke="var(--line)" stroke-width="8" stroke-linecap="round"/>
+
+                        <path d="M86 96l-29-27M73 151H36M88 204l-32 24" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+                        <path d="M381 96l29-27M394 151h37M379 204l32 24" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <section id="concept" class="section">
+            <div class="container">
+                <div class="section-head center">
+                    <h2>現場に寄り添う業務アプリ開発</h2>
+                    <p class="lead">「システム導入は高くて難しい」という常識を覆す、中小製造業様向けのDX支援です。</p>
+                </div>
+                <div class="intro-box">
+                    <p>
+                        毎日、現場から戻って紙の日報や点検表をExcelに打ち直す。そんな二度手間に悩む、IT担当者が不在の中小製造業様を支援します。「DXと言われても何から始めればいいか分からない」「システム会社の見積もりが数百万円で諦めた」という段階からご相談ください。
+                    </p>
+                </div>
+                <div class="grid-3">
+                    <article class="card">
+                        <div class="icon-box" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 20h16M6 16l8.8-8.8a2.1 2.1 0 113 3L9 19H6v-3z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        <h3>情シスのプロが支援</h3>
+                        <p>情報システム部門の外注サービスとして多くの中小企業様を支援してきたエボルテック株式会社が提供します。</p>
+                    </article>
+                    <article class="card">
+                        <div class="icon-box" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M5 8h14M5 16h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+                        </div>
+                        <h3>徹底した現場目線</h3>
+                        <p>製造現場の経験を持つスタッフが在籍。油で汚れた手でも入力しやすいか、今までの帳票と同じ見た目かまで考えます。</p>
+                    </article>
+                    <article class="card">
+                        <div class="icon-box" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M13 3L4 14h7l-1 7 10-12h-7l0-6z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
+                        </div>
+                        <h3>今の帳票から設計</h3>
+                        <p>紙の帳票やExcelフォーマットをベースに、現場が迷わず使える専用アプリを設計。運用を無理に変えません。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section alt">
+            <div class="container">
+                <div class="section-head">
+                    <h2>かんたん現場アプリ作成サービス</h2>
+                    <p class="lead">最新ノーコードツール「Click」を活用し、現場の動きに合わせたスマートフォン・タブレット向け業務アプリをスピーディに開発します。</p>
+                </div>
+                <div class="grid-3">
+                    <article class="card">
+                        <div class="icon-box" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M8 3h8a2 2 0 012 2v14a2 2 0 01-2 2H8a2 2 0 01-2-2V5a2 2 0 012-2zM11 18h2" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+                        </div>
+                        <h3>測定・検査自動記録アプリ</h3>
+                        <p>Bluetooth対応ノギスなどの測定機器とアプリを連携。測った瞬間にスマホへ数値を自動入力し、公差のOK/NGも判定します。</p>
+                        <ul class="service-list">
+                            <li>手書きメモを削減</li>
+                            <li>パソコンへの打ち直しゼロへ</li>
+                            <li>検査結果をリアルタイム共有</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <div class="icon-box" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg>
+                        </div>
+                        <h3>設備・故障点検アプリ</h3>
+                        <p>QRコード読み取り、写真添付、報告送信に対応。異常箇所をその場で記録し、管理者はパソコンで集計を確認できます。</p>
+                        <ul class="service-list">
+                            <li>QRで対象設備を自動入力</li>
+                            <li>写真つきで状況を正確に共有</li>
+                            <li>故障箇所別にチャート集計</li>
+                        </ul>
+                    </article>
+                    <article class="card" id="works">
+                        <div class="icon-box" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 19V5m0 14h16M8 16V9m5 7V6m5 10v-4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+                        </div>
+                        <h3>作業日報・在庫管理アプリ</h3>
+                        <p>毎日の作業内容や棚卸し時の部品数をスマホから入力。選択肢をタップするだけで、管理者のパソコンへ集計されます。</p>
+                        <ul class="service-list">
+                            <li>作業の合間にすばやく入力</li>
+                            <li>過去履歴をキーワード検索</li>
+                            <li>日報・在庫をリアルタイム集計</li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="price-note">
+                    <span class="tag">必要な機能だけに絞って低コスト化</span>
+                    <span class="tag">1画面 10,000円〜</span>
+                    <span class="tag">最短1週間でスピード納品</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container cta-inner">
+                <div>
+                    <h2>まずは、今の帳票を見せてください。</h2>
+                    <p>紙やExcelのフォーマットをそのままベースに、現場が迷わず使える小さなアプリから始められます。</p>
+                </div>
+                <a class="button" href="#contact">相談を始める</a>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container contact-wrap">
+                <div class="contact-note">
+                    <p class="eyebrow">CONTACT</p>
+                    <h2>お問い合わせ</h2>
+                    <p>「この紙をなくしたい」「入力の二度手間を減らしたい」など、今の現場のお困りごとをそのまま教えてください。</p>
+                </div>
+                <form>
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="name">お名前</label>
+                            <input id="name" type="text" placeholder="工房 太郎">
+                        </div>
+                        <div class="field">
+                            <label for="company">会社名</label>
+                            <input id="company" type="text" placeholder="株式会社〇〇">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="email">メールアドレス</label>
+                        <input id="email" type="email" placeholder="example@kobo.jp">
+                    </div>
+                    <div class="field">
+                        <label for="message">ご相談内容</label>
+                        <textarea id="message" rows="5" placeholder="例：紙の日報をスマホ入力にしたい、点検表を写真付きで管理したい、在庫数をリアルタイムで見たい"></textarea>
+                    </div>
+                    <button class="button" type="button" onclick="showSentMessage()">
+                        <span>この内容で送信する</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6l6 6-6 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div id="sent-msg" class="sent-message" role="status">ありがとうございます。メッセージを受け付けました。</div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>© 2026 業務アプリ工房 All Rights Reserved.</div>
+            <div class="footer-links">
+                <a href="#concept">コンセプト</a>
+                <a href="#services">サービス</a>
+                <a href="#contact">お問い合わせ</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showSentMessage() {
+            document.getElementById("sent-msg").classList.add("show");
+        }
+    </script>
+</body>
+</html>
