@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="小さく始める">
+  <defs>
+    <filter id="rough-small">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11"/>
+      <feDisplacementMap in="SourceGraphic" scale="1.8"/>
+    </filter>
+    <mask id="distress-small">
+      <rect width="128" height="128" fill="white"/>
+      <g fill="black" opacity=".45">
+        <circle cx="28" cy="34" r="3"/><circle cx="94" cy="31" r="2.5"/><circle cx="107" cy="67" r="3"/>
+        <circle cx="40" cy="97" r="2.5"/><circle cx="76" cy="104" r="3"/><circle cx="61" cy="22" r="2"/>
+        <rect x="19" y="79" width="20" height="3" rx="1.5" transform="rotate(-12 29 80.5)"/>
+        <rect x="81" y="41" width="24" height="3" rx="1.5" transform="rotate(18 93 42.5)"/>
+        <rect x="39" y="58" width="16" height="2.5" rx="1.2" transform="rotate(-18 47 59)"/>
+      </g>
+    </mask>
+  </defs>
+  <g transform="rotate(-10 64 64)" filter="url(#rough-small)" mask="url(#distress-small)" fill="none" stroke="#d9471e" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="64" cy="64" r="48" stroke-width="8"/>
+    <circle cx="64" cy="64" r="39" stroke-width="2.8" stroke-dasharray="8 6"/>
+    <path d="M32 38c18-10 45-12 65 1M30 90c21 9 47 11 68-1" stroke-width="3" opacity=".75"/>
+  </g>
+  <g transform="rotate(-10 64 64)" fill="#d9471e" font-family="Yu Gothic, Meiryo, sans-serif" font-weight="900" text-anchor="middle" mask="url(#distress-small)">
+    <text x="64" y="58" font-size="21">小さく</text>
+    <text x="64" y="81" font-size="21">始める</text>
+  </g>
+</svg>
