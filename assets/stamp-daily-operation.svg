@@ -1,28 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="日々の運用向け">
+<svg xmlns="http://www.w3.org/2000/svg" width="132" height="132" viewBox="0 0 132 132" role="img" aria-label="日々の運用向け">
   <defs>
-    <filter id="rough-daily">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="22"/>
-      <feDisplacementMap in="SourceGraphic" scale="1.8"/>
+    <filter id="stamp-rough-daily">
+      <feTurbulence type="fractalNoise" baseFrequency="0.055" numOctaves="4" seed="52"/>
+      <feDisplacementMap in="SourceGraphic" scale="3"/>
     </filter>
-    <mask id="distress-daily">
-      <rect width="128" height="128" fill="white"/>
-      <g fill="black" opacity=".45">
-        <circle cx="31" cy="29" r="3"/><circle cx="96" cy="35" r="2.5"/><circle cx="105" cy="83" r="3"/>
-        <circle cx="34" cy="99" r="2.5"/><circle cx="75" cy="101" r="3"/><circle cx="56" cy="24" r="2"/>
-        <rect x="18" y="70" width="23" height="3" rx="1.5" transform="rotate(-13 29.5 71.5)"/>
-        <rect x="79" y="47" width="22" height="3" rx="1.5" transform="rotate(15 90 48.5)"/>
-        <rect x="45" y="85" width="17" height="2.5" rx="1.2" transform="rotate(17 53 86)"/>
+    <mask id="stamp-ink-daily">
+      <rect width="132" height="132" fill="white"/>
+      <g fill="black" opacity=".62">
+        <circle cx="31" cy="25" r="5"/><circle cx="95" cy="29" r="4"/><circle cx="112" cy="67" r="3"/>
+        <circle cx="101" cy="105" r="5"/><circle cx="59" cy="112" r="4"/><circle cx="24" cy="77" r="4"/>
+        <rect x="20" y="42" width="32" height="5" rx="2" transform="rotate(-17 36 44)"/>
+        <rect x="72" y="30" width="35" height="5" rx="2" transform="rotate(13 89 32)"/>
+        <rect x="31" y="93" width="41" height="5" rx="2" transform="rotate(10 51 95)"/>
+        <rect x="78" y="76" width="31" height="4" rx="2" transform="rotate(-16 93 78)"/>
+        <rect x="43" y="59" width="19" height="4" rx="2" transform="rotate(-11 52 61)"/>
       </g>
     </mask>
   </defs>
-  <g transform="rotate(-10 64 64)" filter="url(#rough-daily)" mask="url(#distress-daily)" fill="none" stroke="#d9471e" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="64" cy="64" r="48" stroke-width="8"/>
-    <circle cx="64" cy="64" r="39" stroke-width="2.8" stroke-dasharray="8 6"/>
-    <path d="M32 38c18-10 45-12 65 1M30 90c21 9 47 11 68-1" stroke-width="3" opacity=".75"/>
+  <g transform="rotate(-11 66 66)" filter="url(#stamp-rough-daily)" mask="url(#stamp-ink-daily)" fill="none" stroke="#cf3f1b" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="66" cy="66" r="50" stroke-width="9"/>
+    <circle cx="66" cy="66" r="38" stroke-width="3" stroke-dasharray="7 6"/>
   </g>
-  <g transform="rotate(-10 64 64)" fill="#d9471e" font-family="Yu Gothic, Meiryo, sans-serif" font-weight="900" text-anchor="middle" mask="url(#distress-daily)">
-    <text x="64" y="52" font-size="19">日々の</text>
-    <text x="64" y="73" font-size="20">運用</text>
-    <text x="64" y="92" font-size="17">向け</text>
+  <g transform="rotate(-11 66 66)" fill="#cf3f1b" font-family="Yu Gothic, Meiryo, sans-serif" font-weight="900" text-anchor="middle" mask="url(#stamp-ink-daily)">
+    <text x="66" y="56" font-size="19">日々の</text>
+    <text x="66" y="77" font-size="21">運用</text>
+    <text x="66" y="96" font-size="17">向け</text>
   </g>
 </svg>

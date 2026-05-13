@@ -200,6 +200,18 @@
             transform: rotate(-2deg);
         }
 
+        .contact-note .eyebrow {
+            margin-bottom: 28px;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            color: rgba(255, 255, 255, 0.78);
+            background: transparent;
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            transform: none;
+        }
+
         h1, h2, h3, p {
             margin-top: 0;
         }
@@ -325,6 +337,29 @@
             padding: 86px 0;
         }
 
+        #concept {
+            background: #fffaf3;
+        }
+
+        #services {
+            background:
+                radial-gradient(circle at 12% 10%, rgba(136, 216, 58, 0.24), transparent 28%),
+                radial-gradient(circle at 88% 18%, rgba(255, 90, 0, 0.16), transparent 24%),
+                #fff0df;
+        }
+
+        #pricing {
+            background: #f7fbef;
+        }
+
+        #promise {
+            background: #fff7ed;
+        }
+
+        #contact {
+            background: #f4f8f9;
+        }
+
         .section.alt {
             background:
                 radial-gradient(circle at 12% 10%, rgba(136, 216, 58, 0.28), transparent 28%),
@@ -362,6 +397,15 @@
         .section-head.center h2::after {
             margin-right: auto;
             margin-left: auto;
+        }
+
+        #services .section-head {
+            max-width: 980px;
+        }
+
+        #services h2 {
+            font-size: clamp(28px, 3.2vw, 38px);
+            white-space: nowrap;
         }
 
         .lead {
@@ -405,12 +449,12 @@
 
         .card:nth-child(2n) {
             border-top-color: var(--line);
-            background: transparent;
+            background: #fff;
         }
 
         .card:nth-child(3n) {
             border-top-color: var(--line);
-            background: transparent;
+            background: #fff;
         }
 
         .card:hover {
@@ -620,7 +664,7 @@
 
         .pricing-layout {
             display: grid;
-            grid-template-columns: 1fr 1.1fr 1fr;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 22px;
             align-items: stretch;
         }
@@ -726,17 +770,44 @@
             text-underline-offset: 3px;
         }
 
+        .estimate-cta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-top: 24px;
+            padding: 24px;
+            border-radius: 8px;
+            color: #fff;
+            background: var(--ink);
+            box-shadow: var(--soft-shadow);
+        }
+
+        .estimate-cta h3 {
+            margin-bottom: 4px;
+            color: #fff;
+            font-size: clamp(24px, 3vw, 34px);
+        }
+
+        .estimate-cta p {
+            margin-bottom: 0;
+            color: rgba(255, 255, 255, 0.82);
+            font-weight: 800;
+        }
+
         .price-pack {
             padding: 22px;
             border-top: 4px solid rgba(38, 50, 56, 0.28);
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.66);
+            box-shadow: -10px -10px 0 rgba(38, 50, 56, 0.08), 0 18px 38px rgba(38, 50, 56, 0.08);
             transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
         .price-pack:hover {
             transform: translateY(-6px);
-            border-top-color: var(--line);
+            border-top-color: rgba(38, 50, 56, 0.28);
         }
 
         .price-pack.featured {
@@ -763,13 +834,14 @@
 
         .pack-title {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             align-items: center;
             gap: 16px;
             margin-bottom: 18px;
         }
 
         .pack-stamp-img {
+            flex: 0 0 auto;
             width: auto;
             height: 104px;
             margin: -26px 0 -20px;
@@ -802,7 +874,7 @@
 
         .estimate-link::after,
         .sample-button::after,
-        .button::after {
+        a.button::after {
             content: "→";
             transform: translateX(0);
             transition: transform 0.16s ease;
@@ -810,7 +882,7 @@
 
         .estimate-link:hover::after,
         .sample-button:hover::after,
-        .button:hover::after {
+        a.button:hover::after {
             transform: translateX(4px);
         }
 
@@ -862,11 +934,33 @@
         }
 
         .pack-section-label {
-            display: block;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
             margin: 18px 0 8px;
             color: var(--ink);
             font-size: 13px;
             font-weight: 900;
+        }
+
+        .pack-section-label::before {
+            width: 24px;
+            height: 24px;
+            display: inline-grid;
+            place-items: center;
+            border-radius: 6px;
+            color: #fff;
+            background: var(--orange);
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .pack-section-label[data-kind="screen"]::before {
+            content: "▣";
+        }
+
+        .pack-section-label[data-kind="function"]::before {
+            content: "⚙";
         }
 
         .price-note {
@@ -1023,45 +1117,6 @@
 
         .field {
             margin-bottom: 16px;
-        }
-
-        .privacy-panel {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 14px;
-            margin: 18px 0;
-            padding: 16px;
-            border: 1px solid rgba(38, 50, 56, 0.18);
-            border-radius: 6px;
-            background: #fffaf3;
-        }
-
-        .pmark-badge {
-            width: 74px;
-            min-height: 74px;
-            display: grid;
-            place-items: center;
-            border: 0;
-            border-radius: 6px;
-            color: #fff;
-            background: var(--ink);
-            font-size: 34px;
-            font-weight: 900;
-            line-height: 1;
-        }
-
-        .privacy-copy {
-            margin: 0;
-            color: #455a64;
-            font-size: 13px;
-            font-weight: 800;
-        }
-
-        .privacy-copy strong {
-            display: block;
-            margin-bottom: 4px;
-            color: var(--ink);
-            font-size: 15px;
         }
 
         .consent-check {
@@ -1268,6 +1323,10 @@
             .promise-card p {
                 grid-column: auto;
             }
+
+            .pack-title {
+                flex-wrap: wrap;
+            }
         }
 
         @media (max-width: 620px) {
@@ -1291,6 +1350,10 @@
 
             .hero-points li,
             .tag {
+                white-space: normal;
+            }
+
+            #services h2 {
                 white-space: normal;
             }
 
@@ -1339,9 +1402,9 @@
                         </div>
                         <ul class="hero-points" aria-label="サービスの特徴">
                             <li>1画面 10,000円〜</li>
-                            <li>最短1週間で納品</li>
-                            <li>Clickで高速開発</li>
                             <li>1機能 5,000円〜</li>
+                            <li>最短1週間で納品</li>
+                            <li>ノーコード高速開発</li>
                             <li>小さく始められる</li>
                             <li>IT担当者不在でもOK</li>
                         </ul>
@@ -1357,7 +1420,7 @@
 
         <section id="concept" class="section">
             <div class="container">
-                <div class="section-head center">
+                <div class="section-head">
                     <h2>現場に寄り添う業務アプリ開発</h2>
                     <p class="lead">「システム導入は高くて難しい」という常識を覆す、中小製造業様向けのDX支援です。</p>
                 </div>
@@ -1372,21 +1435,21 @@
                             <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 6a3 3 0 013-3h10a3 3 0 013 3v7a3 3 0 01-3 3H7a3 3 0 01-3-3V6zM8 21h8M12 16v5M8 8h8M8 12h5" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                         <h3>情シスのプロが支援</h3>
-                        <p>中小企業のIT運用を支援してきた知見で、導入前から運用後まで伴走します。</p>
+                        <p>中小企業のIT運用を支援してきた知見をもとに、要件整理から導入後の相談まで伴走します。IT担当者がいない企業様でも、専門用語をかみくだいて分かりやすく進めます。</p>
                     </article>
                     <article class="card">
                         <div class="icon-box" aria-hidden="true">
                             <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 12s3.2-6 9-6 9 6 9 6-3.2 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 15a3 3 0 100-6 3 3 0 000 6zM6 20l3-3M18 20l-3-3" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
                         <h3>徹底した現場目線</h3>
-                        <p>入力しやすいか、迷わないか。現場で毎日使う前提で設計します。</p>
+                        <p>製造現場を経験したスタッフが、作業中に入力しやすいか、迷わず使えるかを現場目線で確認します。机上の便利さではなく、毎日の作業に自然になじむ形を大切にします。</p>
                     </article>
                     <article class="card">
                         <div class="icon-box" aria-hidden="true">
                             <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M7 3h8l4 4v14H7a2 2 0 01-2-2V5a2 2 0 012-2zM14 3v5h5M8 12h8M8 16h5" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 17l3 3M19 17l-3 3" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/></svg>
                         </div>
                         <h3>今の帳票から設計</h3>
-                        <p>紙やExcelの形を活かして、運用を大きく変えずにアプリ化します。</p>
+                        <p>今使っている紙の帳票やExcelの項目、確認の流れをベースに設計します。現場のやり方を急に変えるのではなく、慣れた運用を活かしながら少しずつアプリ化します。</p>
                     </article>
                 </div>
             </div>
@@ -1395,8 +1458,8 @@
         <section id="services" class="section alt">
             <div class="container">
                 <div class="section-head">
-                    <h2>かんたん現場アプリ作成サービス</h2>
-                    <p class="lead">製造業で導入しやすいサンプルアプリ公開中です。</p>
+                    <h2>製造業で導入しやすいサンプルアプリ公開中</h2>
+                    <p class="lead">まずは実際の操作イメージを見ながら、自社の業務に近い形を確認できます。</p>
                 </div>
                 <div class="sample-showcase">
                     <article class="sample-panel">
@@ -1460,7 +1523,6 @@
                 <div class="section-head">
                     <h2>パック料金</h2>
                     <p class="lead">必要な機能を、必要な分だけ。スモールスタートに最適な明朗会計です。</p>
-                    <a class="estimate-link" href="#" data-estimate-app>見積アプリを開く</a>
                 </div>
                 <div class="pricing-intro">
                     <div class="pricing-message">
@@ -1488,13 +1550,13 @@
                             <p class="pack-note">まずは1つの業務をアプリ化したい方向け。</p>
                         </div>
                         <p class="pack-summary">入力、一覧、編集の基本セットです。</p>
-                        <span class="pack-section-label">含まれる画面</span>
+                        <span class="pack-section-label" data-kind="screen">含まれる画面</span>
                         <ul class="pack-list">
                             <li>入力画面：データを登録する画面</li>
                             <li>一覧画面：登録したデータを確認する画面</li>
                             <li>編集画面：データの修正・削除をする画面</li>
                         </ul>
-                        <span class="pack-section-label">含まれる機能</span>
+                        <span class="pack-section-label" data-kind="function">含まれる機能</span>
                         <ul class="pack-list">
                             <li>データ登録機能</li>
                             <li>データ編集機能</li>
@@ -1510,7 +1572,7 @@
                             <p class="pack-note">実績データを継続して管理したい方向け。</p>
                         </div>
                         <p class="pack-summary">日々の入力、検索、マスター管理まで含む運用セットです。</p>
-                        <span class="pack-section-label">含まれる画面</span>
+                        <span class="pack-section-label" data-kind="screen">含まれる画面</span>
                         <ul class="pack-list">
                             <li>実績入力画面：日々の記録を登録する画面</li>
                             <li>実績一覧画面：登録内容をまとめて見る画面</li>
@@ -1519,7 +1581,7 @@
                             <li>マスター登録画面：選択肢や基本情報を登録する画面</li>
                             <li>マスター編集画面：基本情報の修正・削除をする画面</li>
                         </ul>
-                        <span class="pack-section-label">含まれる機能</span>
+                        <span class="pack-section-label" data-kind="function">含まれる機能</span>
                         <ul class="pack-list">
                             <li>実績データ登録機能</li>
                             <li>実績データ検索機能</li>
@@ -1537,13 +1599,13 @@
                             <p class="pack-note">既存帳票や独自ルールに合わせたい方向け。</p>
                         </div>
                         <p class="pack-summary">必要な画面数、機能を組み合わせてオリジナルパックを作成します。</p>
-                        <span class="pack-section-label">追加できる画面</span>
+                        <span class="pack-section-label" data-kind="screen">追加できる画面</span>
                         <ul class="pack-list">
                             <li>既存帳票・Excelに合わせた入力画面</li>
                             <li>管理者向けの集計・検索・確認画面</li>
                             <li>モバイル／PC／レスポンシブ対応</li>
                         </ul>
-                        <span class="pack-section-label">追加できる機能</span>
+                        <span class="pack-section-label" data-kind="function">追加できる機能</span>
                         <ul class="pack-list">
                             <li>写真撮影・添付機能</li>
                             <li>QR読み取り機能</li>
@@ -1556,12 +1618,19 @@
                     <h3>ランニングコストについて</h3>
                     <p>アプリの利用には、別途ノーコードツール <a href="https://click.dev/" target="_blank" rel="noopener">Click</a> の利用料がかかります。Clickの料金・機能の詳細は公式ページをご確認ください。</p>
                 </div>
+                <div class="estimate-cta">
+                    <div>
+                        <h3>最短30秒で見積もり！！</h3>
+                        <p>画面数と機能を選ぶだけで、概算費用をすぐに確認できます。</p>
+                    </div>
+                    <a class="estimate-link" href="#" data-estimate-app>見積アプリを開く</a>
+                </div>
             </div>
         </section>
 
         <section id="promise" class="section">
             <div class="container">
-                <div class="section-head center">
+                <div class="section-head">
                     <h2>業務アプリ工房「4つの約束」</h2>
                     <p class="lead">お客様の「こんなアプリが欲しかった」を形にするために</p>
                 </div>
@@ -1600,20 +1669,6 @@
             </div>
         </section>
 
-        <section id="privacy" class="section alt">
-            <div class="container">
-                <div class="section-head">
-                    <h2>個人情報の取り扱い</h2>
-                    <p class="lead">お問い合わせでいただいた個人情報と添付資料は、ご相談への回答、見積り、サービス提供に必要な範囲で利用します。</p>
-                </div>
-                <div class="intro-box">
-                    <p>
-                        取得した情報を本人の同意なく第三者へ提供することはありません。法令に基づく場合や、回答・保守に必要な委託先へ適切な管理のもとで取り扱いを委託する場合を除きます。
-                    </p>
-                </div>
-            </div>
-        </section>
-
         <section id="contact" class="section">
             <div class="container contact-wrap">
                 <div class="contact-note">
@@ -1625,7 +1680,7 @@
                     <div class="form-grid">
                         <div class="field">
                             <label for="name">お名前</label>
-                            <input id="name" name="name" type="text" placeholder="工房 太郎">
+                            <input id="name" name="name" type="text" placeholder="工房 太郎" required>
                         </div>
                         <div class="field">
                             <label for="company">会社名</label>
@@ -1634,7 +1689,7 @@
                     </div>
                     <div class="field">
                         <label for="email">メールアドレス</label>
-                        <input id="email" name="email" type="email" placeholder="example@kobo.jp">
+                        <input id="email" name="email" type="email" placeholder="example@kobo.jp" required>
                     </div>
                     <div class="field">
                         <label for="message">ご相談内容</label>
@@ -1646,16 +1701,9 @@
                         <p class="file-help">帳票、Excel、写真、PDFなどを添付できます。</p>
                         <div id="file-list" class="file-list" aria-live="polite"></div>
                     </div>
-                    <div class="privacy-panel" aria-label="個人情報保護への取り組み">
-                        <div class="pmark-badge" aria-label="Pマーク">P</div>
-                        <p class="privacy-copy">
-                            <strong>個人情報保護方針に基づき適切に取り扱います</strong>
-                            お問い合わせ内容、添付資料、連絡先情報は、ご相談への回答とご提案のために利用します。
-                        </p>
-                    </div>
                     <label class="consent-check" for="privacy-consent">
                         <input id="privacy-consent" name="privacyConsent" type="checkbox" required>
-                        <span><a href="#privacy">個人情報の取り扱い</a>に同意します</span>
+                        <span><a href="https://evoltech-hdc-system.com/%E5%80%8B%E4%BA%BA%E6%83%85%E5%A0%B1%E4%BF%9D%E8%AD%B7%E6%96%B9%E9%87%9D/" target="_blank" rel="noopener">個人情報保護方針</a>に同意します</span>
                     </label>
                     <button class="button" type="button" onclick="showSentMessage()">
                         <span>この内容で送信する</span>
@@ -1680,11 +1728,11 @@
     </footer>
 
     <script>
-        const revealTargets = document.querySelectorAll(".section-head, .intro-box, .card, .sample-panel, .pricing-intro, .price-unit, .running-cost, .price-pack, .promise-card, .contact-note, form");
+        const revealTargets = document.querySelectorAll(".section-head, .intro-box, .card, .sample-panel, .pricing-intro, .price-unit, .running-cost, .estimate-cta, .price-pack, .promise-card, .contact-note, form");
 
         revealTargets.forEach((element) => {
             const siblings = Array.from(element.parentElement?.children || []);
-            const revealIndex = siblings.filter((item) => item.matches?.(".section-head, .intro-box, .card, .sample-panel, .pricing-intro, .price-unit, .running-cost, .price-pack, .promise-card, .contact-note, form")).indexOf(element);
+            const revealIndex = siblings.filter((item) => item.matches?.(".section-head, .intro-box, .card, .sample-panel, .pricing-intro, .price-unit, .running-cost, .estimate-cta, .price-pack, .promise-card, .contact-note, form")).indexOf(element);
             const delay = Math.max(0, revealIndex) * 90;
 
             element.style.setProperty("--reveal-delay", `${Math.min(delay, 360)}ms`);
